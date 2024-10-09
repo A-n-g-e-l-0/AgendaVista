@@ -1,5 +1,5 @@
 
-<form (ngSubmit)="submitForm()" #personaForm="ngForm">
+<form #personaForm="ngForm" (ngSubmit)="submitForm(personaForm)" >
 
 <div class=" bg-white px-6 py-24 sm:py-32 lg:px-8">
     <div class="absolute inset-x-0 top-[-10rem] 
@@ -18,12 +18,33 @@
         <div>
           <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">Nombre</label>
           <div class="mt-2.5">
-            <input type="text" autocomplete="given-name" 
+            <input 
+            type="text" 
+            autocomplete="given-name" 
             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm 
             ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-            focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            id="nombre" name="nombre" [(ngModel)]="persona.nombre" required
+            focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
+            "
+            id="nombre" 
+            name="nombre" 
+            [(ngModel)]="persona.nombre"  
+            required minlength="4" maxlength="50"
+            #name="ngModel"
             >
+            
+          </div>
+          <div *ngIf="name.invalid && (name.dirty || name.touched)"
+              class="alert">
+            <div *ngIf="name.hasError('required')">
+                <div class=" text-rose-600"> Nombre es requerido.</div>
+            </div>
+            <div *ngIf="name.hasError('minlength')"  >
+             <div class="text-rose-600"> Nombre al menos 4 caracteres.</div>
+            </div>
+            
+            <div *ngIf="name.hasError('maxlength')"  >
+                <div class="text-rose-600"> Nombre no mayor a 50 caracteres.</div>
+               </div>
           </div>
         </div>
        
@@ -42,24 +63,40 @@
         <div class="sm:col-span-2">
           <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
           <div class="mt-2.5">
-            <input type="email" autocomplete="email" 
+            <input 
+            type="email"
+            autocomplete="email" 
             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm 
             ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
             focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-             id="email" name="email" [(ngModel)]="persona.email" required
+            id="email"
+             name="email"
+              [(ngModel)]="persona.email"
+               #mail="ngModel"
+              required email
             >
           </div>
+                <div *ngIf="mail.invalid && (mail.dirty || mail.touched)"
+                class="alert">
+                <div *ngIf="mail.hasError('email')">
+                    <div class=" text-rose-600"> Mail incorrecto.</div>
+                </div>
+                <div *ngIf="mail.hasError('required')">
+                    <div class=" text-rose-600"> Mail requerido.</div>
+                </div>
+            </div>
         </div>
        
        
       <div class="mt-10">
         <button type="submit" 
-        class="block w-full rounded-md bg-indigo-600 
+        class="block w-full rounded-md bg-blue-600
         px-3.5 py-2.5 text-center text-sm font-semibold text-white 
         shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 
         focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        
-        >Alta</button>
+        >
+        <div class="text-neutral-50">Alta</div>    
+    </button>
       </div>
    
   </div>

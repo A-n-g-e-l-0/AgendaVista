@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Persona } from '../../Interfaces/Persona';
 import { ApiPersonaService } from '../../Services/api-persona.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-crear-persona',
   standalone: true,
-  imports: [ FormsModule],
+  imports: [ FormsModule, CommonModule],
   templateUrl: './crear-persona.component.html',
   styleUrl: './crear-persona.component.css'
 })
-export class CrearPersonaComponent {
+export class CrearPersonaComponent implements OnInit {
+
+  visible=true
+ 
+
+  constructor(private router: Router, private apiService: ApiPersonaService) {}
+
+
+
 
   persona: Persona = {
     nombre: '',
@@ -20,13 +29,22 @@ export class CrearPersonaComponent {
   };
 
 
-submitForm() {
-  console.log('Pruebas  ' + this.persona)
+  ngOnInit(): void {
+    
+  }
+
  
-}
 
-  constructor(private router: Router, private apiService: ApiPersonaService) {}
-
+  submitForm(form: NgForm) {
+    if (form.invalid) {
+      Object.keys(form.controls).forEach(field => {
+        const control = form.control.get(field);
+        control?.markAsTouched({ onlySelf: true });
+      });
+      return;
+    }
+    // Handle valid form submission
+  }
   goToPersonas() {
     this.router.navigate(['/listar']);
   }
@@ -37,4 +55,6 @@ submitForm() {
 
 
 
+
 }
+
