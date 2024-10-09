@@ -60,6 +60,14 @@ export class CrearPersonaComponent implements OnInit {
     this.apiService.postData('registrar',persona).subscribe(
       response => {
         console.log('Response:', response);
+        // Show pop-up message
+        alert('The registry is done!');
+
+        // Clear input fields
+        const form = document.querySelector('form');
+        if (form) {
+          form.reset();
+        }
       },
       error => {
         console.error('Error:', error);
