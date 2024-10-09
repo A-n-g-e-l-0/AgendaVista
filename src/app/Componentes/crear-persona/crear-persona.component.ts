@@ -42,6 +42,8 @@ export class CrearPersonaComponent implements OnInit {
         control?.markAsTouched({ onlySelf: true });
       });
       return;
+    }else{
+      this.pushDataPersona(this.persona)
     }
     // Handle valid form submission
   }
@@ -54,6 +56,16 @@ export class CrearPersonaComponent implements OnInit {
   }
 
 
+  pushDataPersona(persona: Persona){
+    this.apiService.postData('registrar',persona).subscribe(
+      response => {
+        console.log('Response:', response);
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    )
+  }
 
 
 }

@@ -13,6 +13,11 @@ module.exports = {
       },
       'neutral':{
         50:'#fafafa'
+      },
+      'gray':{
+        50:'#f9fafb',
+        800:'#1f2937',
+
       }
     },
   },
