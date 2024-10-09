@@ -1,4 +1,6 @@
 
+<form (ngSubmit)="submitForm()" #personaForm="ngForm">
+
 <div class=" bg-white px-6 py-24 sm:py-32 lg:px-8">
     <div class="absolute inset-x-0 top-[-10rem] 
     -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" >
@@ -16,30 +18,36 @@
         <div>
           <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">Nombre</label>
           <div class="mt-2.5">
-            <input type="text" name="first-name" id="first-name" autocomplete="given-name" 
+            <input type="text" autocomplete="given-name" 
             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm 
             ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-            focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            id="nombre" name="nombre" [(ngModel)]="persona.nombre" required
+            >
           </div>
         </div>
        
         <div>
-            <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">Edad</label>
+            <label for="age" class="block text-sm font-semibold leading-6 text-gray-900">Edad</label>
             <div class="mt-2.5">
-              <input type="text" 
-              class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 
-              shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-              focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <input class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 
+              shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset 
+              focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              type="number" id="edad" name="edad" [(ngModel)]="persona.edad" required
+              >
             </div>
           </div>
+          
       
         <div class="sm:col-span-2">
           <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
           <div class="mt-2.5">
-            <input type="email" name="email" id="email" autocomplete="email" 
+            <input type="email" autocomplete="email" 
             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm 
             ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
-            focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+             id="email" name="email" [(ngModel)]="persona.email" required
+            >
           </div>
         </div>
        
@@ -49,7 +57,9 @@
         class="block w-full rounded-md bg-indigo-600 
         px-3.5 py-2.5 text-center text-sm font-semibold text-white 
         shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 
-        focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Alta</button>
+        focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        
+        >Alta</button>
       </div>
    
   </div>
